@@ -17,14 +17,14 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-            $validator= Validator::make($request->all(), [
+            $validator = Validator::make($request->all(), [
                 'email' => 'required|string|email|unique:users',
                 'password' => 'required',
             ]);
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Email is already taken.'
+                    'message' => $validator->errors()->first()
                 ], 400);
             }
 
