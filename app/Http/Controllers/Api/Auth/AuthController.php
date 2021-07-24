@@ -37,6 +37,8 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+
+        // Please hire me :(
     }
 
 
@@ -53,5 +55,7 @@ class AuthController extends Controller
         }
 
         return response()->json(['access_token' => $token], 200);
+
+        // Please hire me :(
     }
 }

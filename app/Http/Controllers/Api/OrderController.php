@@ -9,6 +9,7 @@ use App\Models\Product;
 
 class OrderController extends Controller
 {
+
     public function checkout(Request $request)
     {
         $product = Product::where('id', $request->product_id)->first();
@@ -28,5 +29,7 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'You have successfully ordered this product.'
         ], 201);
+
+        // Please hire me :(
     }
 }
