@@ -11,7 +11,6 @@ class OrderController extends Controller
 {
     public function checkout(Request $request)
     {
-        $user = Auth::user();
         $product = Product::where('id', $request->product_id)->first();
 
         if ($request->quantity > $product->available_stock) {
@@ -20,7 +19,7 @@ class OrderController extends Controller
             ], 400);
         }
 
-        $user->orders()->create($request->only(['user_id', 'product_id', 'quantity']));
+        Auth::user()->orders()->create($request->only(['user_id', 'product_id', 'quantity']));
         $stock = $product->available_stock - $request->quantity;
         $product->update([
             'available_stock' => $stock
@@ -29,6 +28,5 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'You have successfully ordered this product.'
         ], 201);
-        
     }
 }
